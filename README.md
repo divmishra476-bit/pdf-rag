@@ -2,7 +2,7 @@
 
 A Retrieval-Augmented Generation (RAG) system that answers questions about any uploaded PDF, grounded strictly in the document's content. Built from scratch — no LangChain/LlamaIndex — to understand every layer of the pipeline: extraction, chunking, embeddings, vector search, and grounded generation.
 
-**Live demo:** [add your deployed Streamlit link here]
+**Live demo:** https://pdf-rag-bfivgarhe9ab4h89sljcuj.streamlit.app
 
 ## What it does
 
@@ -66,6 +66,9 @@ Tested with 9 questions spanning four categories, specifically to probe for weak
 | Ambiguous/adjacent questions (e.g. "is it available on AWS?") | Gave a nuanced answer — distinguished "trained using AWS infrastructure" from "available as an AWS product," rather than overclaiming either way |
 
 This is the result I consider most important: the system's honesty under ambiguity, not just its accuracy on easy questions.
+
+**Known limitation found during live testing (n_results=3):**
+Enumeration and comparison-style questions (e.g., "what are the three models in the family," "compare X vs Y") occasionally failed — the system said "I don't know" even though the document contained the answer. Root cause: the 3 nearest-neighbor chunks sometimes clustered around only one side of a comparison, so the model genuinely didn't have both halves of the answer in context, and correctly refused rather than guessing. Single-topic and section-summary questions were unaffected (6/8 answerable questions passed).
 
 **Edge cases handled:**
 - Corrupted/incomplete PDF downloads (caught via cross-checking two different PDF libraries)
