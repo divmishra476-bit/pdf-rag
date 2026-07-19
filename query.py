@@ -20,7 +20,7 @@ def ask_question(question):
 
     results = collection.query(  # asking chroma to search which embedding are closest in meaning to qn's embedding
         query_embeddings=[question_embedding],  # our qn is embedded and we are putting it query_embeddings process of chroma
-        n_results=3  # return 3 closest matches
+        n_results=5  # return 5 closest matches
     )
 
     # results["documents"] = [[chunk_A, chunk_B, chunk_C]] -> outer bracket = questions, inner = matches
