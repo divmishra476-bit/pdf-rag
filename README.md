@@ -67,8 +67,7 @@ Tested with 9 questions spanning four categories, specifically to probe for weak
 
 This is the result I consider most important: the system's honesty under ambiguity, not just its accuracy on easy questions.
 
-**Known limitation found during live testing (n_results=3):**
-Enumeration and comparison-style questions (e.g., "what are the three models in the family," "compare X vs Y") occasionally failed — the system said "I don't know" even though the document contained the answer. Root cause: the 3 nearest-neighbor chunks sometimes clustered around only one side of a comparison, so the model genuinely didn't have both halves of the answer in context, and correctly refused rather than guessing. Single-topic and section-summary questions were unaffected (6/8 answerable questions passed).
+**Retrieval tuning note:** At `n_results=3`, enumeration and comparison-style questions (e.g., "what are the three models in the family," "compare X vs Y") occasionally failed — the system said "I don't know" even though the document contained the answer. Root cause: the 3 nearest-neighbor chunks sometimes clustered around only one side of a comparison, so the model genuinely didn't have both halves of the answer in context, and correctly refused rather than guessing. Single-topic and section-summary questions were unaffected (6/8 answerable questions passed). Increasing `n_results` to 5 resolved this — both previously-failing questions then answered correctly, including one case where the model appropriately reasoned from a partial quote ("fastest and least expensive") rather than fabricating precise numbers not present in the source.
 
 **Edge cases handled:**
 - Corrupted/incomplete PDF downloads (caught via cross-checking two different PDF libraries)
