@@ -39,16 +39,16 @@ Context:{context}
 Question:{question}
 
 """
-    try:
-    response = client.chat.completions.create(
-        model="openai/gpt-oss-120b",
-        messages=[
-            {"role": "user", "content": prompt}
-        ]
-    )
-    return response.choices[0].message.content
-except Exception as e:
-    return f"Sorry, something went wrong while generating the answer. (Error: {e})"
+        try:
+        response = client.chat.completions.create(
+            model="openai/gpt-oss-120b",
+            messages=[
+                {"role": "user", "content": prompt}
+            ]
+        )
+        return response.choices[0].message.content
+    except Exception as e:
+        return f"Sorry, something went wrong while generating the answer. (Error: {e})"
 
 
 if __name__ == "__main__":  # only runs this test block when query.py is run directly, not when another file imports ask_question from it
