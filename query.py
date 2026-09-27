@@ -39,15 +39,16 @@ Context:{context}
 Question:{question}
 
 """
-
-    response = client.chat.completions.create(  # the actual API call: "here's a conversation, give me a response"
+    try:
+    response = client.chat.completions.create(
         model="openai/gpt-oss-120b",
         messages=[
-            {"role": "user", "content": prompt}  # mark this message coming from user (me) and content is actual text coming from my side
+            {"role": "user", "content": prompt}
         ]
     )
-
-    return response.choices[0].message.content  # return instead of print, so we can use the answer for many questions
+    return response.choices[0].message.content
+except Exception as e:
+    return f"Sorry, something went wrong while generating the answer. (Error: {e})"
 
 
 if __name__ == "__main__":  # only runs this test block when query.py is run directly, not when another file imports ask_question from it
