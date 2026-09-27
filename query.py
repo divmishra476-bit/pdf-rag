@@ -41,7 +41,7 @@ Question:{question}
 """
 
     response = client.chat.completions.create(  # the actual API call: "here's a conversation, give me a response"
-        model="llama-3.3-70b-versatile",
+        model="openai/gpt-oss-120b",
         messages=[
             {"role": "user", "content": prompt}  # mark this message coming from user (me) and content is actual text coming from my side
         ]
