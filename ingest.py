@@ -23,7 +23,7 @@ def ingest_pdf(pdf_path):
         full_text += page.get_text()
 
     chunks = chunk_text(full_text)
-    all_embeddings = model.encode(chunks).tolist()  # all_embedding is a list so len(all_embedding)=len(chunks)
+    all_embeddings = model.encode(chunks)  # all_embedding is a list so len(all_embedding)=len(chunks)
 
     chroma_client = chromadb.PersistentClient(path="./chroma_db")  # creating a connection to chroma database (persistent -> saved to disk, survives after script ends)
 
